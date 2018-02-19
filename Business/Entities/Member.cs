@@ -12,6 +12,7 @@ namespace Business.Entity
         public String MemberFirstName { get; set; }
         public String MemberLastName { get; set; }
         public String MemberUserName { get; set; }
+        public ICollection<BlogSpace> BlogSpaces { get; set; }
         public Member() { }
     }
 }
