@@ -11,6 +11,7 @@ namespace Business.Domain
     {
         void CreateBlogSpaceIfNotExists(BlogSpace blogSpace);
         List<Member> GetAllBlogSpaces();
+        List<Member> GetAllBlogSpacesByMemberId(int id);
         /**
          * Hier aufgehört => kein Bearbeiten erstekkeb
          * GetAllBlogSpacesByMember(Member member)

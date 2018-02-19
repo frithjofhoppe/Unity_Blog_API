@@ -26,6 +26,11 @@ namespace Business.Domain
             }
         }
 
+        public void DeleteMember(Member member)
+        {
+            _memberRepository.DeleteMember(member);
+        }
+
         public List<Member> GetAllMembers()
         {
             return _memberRepository.GetAllMembers().ToList();

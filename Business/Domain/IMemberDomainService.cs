@@ -10,6 +10,7 @@ namespace Business.Domain
     public interface IMemberDomainService
     {
         void CreateMemberIfNotExists(Member member);
+        void DeleteMember(Member member);
         void ModifyMember(Member member);
         List<Member> GetAllMembers();
     }

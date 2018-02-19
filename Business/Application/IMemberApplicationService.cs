@@ -11,6 +11,7 @@ namespace Business.Application
     {
         void CreateMember(Member member);
         void ModifyMember(Member member);
+        void DeleteMember(Member member);
         List<Member> GetAllMembers();
     }
 }

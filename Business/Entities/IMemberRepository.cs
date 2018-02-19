@@ -8,7 +8,8 @@ namespace Business.Entity
 {
     public interface IMemberRepository
     {
-        void CreateMember(Member member); 
+        void CreateMember(Member member);
+        void DeleteMember(Member member);
         Member GetMemberById(int id);
         IQueryable<Member> GetAllMembers();
     }
