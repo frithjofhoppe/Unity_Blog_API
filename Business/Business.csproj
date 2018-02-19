@@ -79,11 +79,18 @@
     <Compile Include="Application\IMemberApplicationService.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
+    <Compile Include="Domain\BlogSpaceDomainService.cs" />
+    <Compile Include="Domain\IBlogSpaceDomainService.cs" />
     <Compile Include="Domain\IMemberDomainService.cs" />
     <Compile Include="Domain\MemberDomainService.cs" />
+    <Compile Include="Entities\Article.cs" />
+    <Compile Include="Entities\BlogSpace.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\IBlogSpaceRepository.cs" />
     <Compile Include="Entities\IMemberRepository.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Application\MemberApplicationService.cs" />
+    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
