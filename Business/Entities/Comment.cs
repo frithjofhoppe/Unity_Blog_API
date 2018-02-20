@@ -11,6 +11,7 @@ namespace Business.Entity
         public int CommentId { get; set; }
         public String CommentContent { get; set; }
         public Article Article { get; set; }
+        public Member Member { get; set; }
         public Comment() { }
     }
 }

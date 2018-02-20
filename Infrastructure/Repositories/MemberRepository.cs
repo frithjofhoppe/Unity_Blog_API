@@ -17,9 +17,20 @@ namespace Infrastructure
             _context = applicationContext;
         }
 
+        public void ModifyMember()
+        {
+            _context.SaveChanges();
+        }
+
         public void CreateMember(Member member)
         {
             _context.Members.Add(member);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMember(Member member)
+        {
+            _context.Members.Remove(member);
             _context.SaveChanges();
         }
 

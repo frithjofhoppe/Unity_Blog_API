@@ -10,6 +10,7 @@ namespace Business.Entity
     {
         public int ArticleId { get; set; }
         public String ArticleTitle { get; set; }
+        public bool BlogSpaceIsPublic { get; set; }
         public DateTime ArticleCreation { get; set; }
         public DateTime ArticleLastModification { get; set; }
         public ICollection<Tag> Tags { get; set; }

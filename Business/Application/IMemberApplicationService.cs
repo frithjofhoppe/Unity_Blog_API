@@ -13,5 +13,7 @@ namespace Business.Application
         void ModifyMember(Member member);
         void DeleteMember(Member member);
         List<Member> GetAllMembers();
+        Member GetMemberById(int id);
+        Member GetMemberByUsername(String username);
     }
 }

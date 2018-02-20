@@ -13,5 +13,7 @@ namespace Business.Domain
         void DeleteMember(Member member);
         void ModifyMember(Member member);
         List<Member> GetAllMembers();
+        Member GetMemberById(int id);
+        Member GetMemberByUsername(String name);
     }
 }

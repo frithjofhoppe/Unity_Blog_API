@@ -10,6 +10,7 @@ namespace Business.Entity
     {
         void CreateMember(Member member);
         void DeleteMember(Member member);
+        void ModifyMember();
         Member GetMemberById(int id);
         IQueryable<Member> GetAllMembers();
     }

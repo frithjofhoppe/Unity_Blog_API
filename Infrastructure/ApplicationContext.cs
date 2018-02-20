@@ -17,6 +17,14 @@ namespace Infrastructure
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public ApplicationContext() : base("name=defaultConnectionString") { }
+        public ApplicationContext() : base("name=defaultConnectionString") {
+            this.Database.CreateIfNotExists();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Database.SetInitializer<ApplicationContext>(null);
+            //base.OnModelCreating(modelBuilder);
+        }
     }
 }
