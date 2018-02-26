@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\BlogApplicationService.cs" />
     <Compile Include="Application\IBlogApplicationService.cs" />
     <Compile Include="Application\IMemberApplicationService.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -101,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

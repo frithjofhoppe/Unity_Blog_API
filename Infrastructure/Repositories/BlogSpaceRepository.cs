@@ -23,6 +23,16 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public void DeleteBlogSpaceById(int id)
+        {
+            BlogSpace exisiting = _context.BlogSpaces.FirstOrDefault(item => item.BlogSpaceId == id);
+            if(exisiting != null)
+            {
+                _context.BlogSpaces.Remove(exisiting);
+                _context.SaveChanges();
+            }
+        }
+
         public IQueryable<BlogSpace> GetAllBlogSpaces()
         {
             return _context.BlogSpaces;
@@ -34,6 +44,18 @@ namespace Infrastructure.Repositories
                 .Include(item => item.Articles)
                 .Include(item => item.Member)
                 .FirstOrDefault(item => item.BlogSpaceId == id);
+        }
+
+        public void ModifyBlog(BlogSpace blogSpace)
+        {
+            BlogSpace exisiting = _context.BlogSpaces
+                .FirstOrDefault(item => item.BlogSpaceId == blogSpace.BlogSpaceId);
+            if (exisiting != null)
+            {
+                exisiting.BlogSpaceIsPublic = blogSpace.BlogSpaceIsPublic;
+                exisiting.BlogSpaceTitle = blogSpace.BlogSpaceTitle;
+                _context.SaveChanges();
+            }
         }
     }
 }
