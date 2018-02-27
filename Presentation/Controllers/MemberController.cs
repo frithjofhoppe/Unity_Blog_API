@@ -19,13 +19,6 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public IEnumerable<Member> GetAllMembers()
-        {
-            return _service.GetAllMembers();
-        }
-
-        [HttpGet]
         [Route("{username}")]
         public Member GetMemberByUserName(String username)
         {

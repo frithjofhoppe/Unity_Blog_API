@@ -9,10 +9,11 @@ namespace Business.Domain
 {
     public interface IBlogSpaceDomainService
     {
-        void CreateBlogSpaceIfNotExists(BlogSpace blogSpace);
-        void DeleteBlogByBlogId(int id);
-        void ModifyBlog(BlogSpace blogSpace);
-        List<Member> GetAllBlogSpaces();
-        List<Member> GetAllBlogSpacesByMemberUserName(String username);
+        void CreateBlogSpace(string username, BlogSpace blogSpace);
+        void DelteBlogSpace(string username, int blogId);
+        List<BlogSpace> GetAllBlogSpaces(string username);
+        BlogSpace GetBlogById(int id);
+        void ModifyBlogSpace(string username, BlogSpace blogSpace);
+        void DeleteAllBlogSpaces(string username);
     }
 }

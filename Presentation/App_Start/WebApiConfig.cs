@@ -2,6 +2,7 @@
 using Business.Domain;
 using Business.Entity;
 using Infrastructure;
+using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,11 +23,20 @@ namespace Presentation
             // Web API routes
 
             var container = new UnityContainer();
-            container.RegisterType<IMemberApplicationService, MemberApplicationService>();
-            container.RegisterType<IMemberRepository, MemberRepository>();
-            container.RegisterType<IMemberDomainService, MemberDomainService>();
-            config.DependencyResolver = new UnityDependencyResolver(container);
 
+            container.RegisterType<IMemberApplicationService, MemberApplicationService>();
+            container.RegisterType<IBlogApplicationService, BlogApplicationService>();
+            container.RegisterType<IArticleApplicationService, ArticleApplicationService>();
+
+            container.RegisterType<IMemberRepository, MemberRepository>();
+            container.RegisterType<IBlogSpaceRepository, BlogSpaceRepository>();
+            container.RegisterType<IArticleRepository, ArticleRepository>();
+
+            container.RegisterType<IMemberDomainService, MemberDomainService>();
+            container.RegisterType<IBlogSpaceDomainService, BlogSpaceDomainService>();
+            container.RegisterType<IArticleDomainService, ArticleDomainService>();
+
+            config.DependencyResolver = new UnityDependencyResolver(container);
             config.MapHttpAttributeRoutes();
 
             //config.Routes.MapHttpRoute(

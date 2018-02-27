@@ -15,5 +15,6 @@ namespace Business.Domain
         List<Member> GetAllMembers();
         Member GetMemberById(int id);
         Member GetMemberByUsername(String name);
+        bool RelationWithBlogSpace(int memberId, int blogId);
     }
 }

@@ -5,15 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.CustomException;
 using Business.Entity;
+using System.Data.Entity;
 
 namespace Business.Domain
 {
     public class MemberDomainService : IMemberDomainService
     {
-        private IMemberRepository _memberRepository;
-        public MemberDomainService(IMemberRepository memberRepository)
+        private readonly IMemberRepository _memberRepository;
+        private readonly IBlogSpaceRepository _blogSpaceRepository;
+        private readonly IBlogSpaceDomainService _blogSpaceDomainService;
+        public MemberDomainService(IMemberRepository memberRepository, IBlogSpaceRepository blogSpaceRepository, IBlogSpaceDomainService blogSpaceDomainService)
         {
             _memberRepository = memberRepository;
+            _blogSpaceRepository = blogSpaceRepository;
+            _blogSpaceDomainService = blogSpaceDomainService;
         }
         public void CreateMemberIfNotExists(Member member)
         {
@@ -30,15 +35,18 @@ namespace Business.Domain
 
         public void DeleteMember(Member member)
         {
-            if(member.MemberId < 0)
-            {
-                throw new MemberNotFoundException();
-            }
+            _blogSpaceDomainService.DeleteAllBlogSpaces(member.MemberUserName);
 
             Member toDelete = _memberRepository.GetMemberById(member.MemberId);
 
-            _memberRepository
-                .DeleteMember(toDelete);
+            if (toDelete != null)
+            {
+                _memberRepository.DeleteMember(toDelete);
+            }
+            else
+            {
+                throw new MemberNotFoundException();
+            }
         }
 
         public List<Member> GetAllMembers()
@@ -74,6 +82,24 @@ namespace Business.Domain
                 possiblyExists.MemberLastName = member.MemberLastName;
                 _memberRepository.ModifyMember();
             }
+        }
+
+        public bool RelationWithBlogSpace(int memberId, int blogId)
+        {
+            Member existingMember = _memberRepository.GetMemberById(memberId);
+            if (existingMember != null)
+            {
+                BlogSpace existingSpace = _blogSpaceRepository
+                    .GetAllBlogSpaces()
+                    .Include(item => item.Member)
+                    .FirstOrDefault(item => item.Member.MemberId == memberId &&
+                                            item.BlogSpaceId == blogId);
+                if (existingSpace != null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

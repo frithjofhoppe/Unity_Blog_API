@@ -9,10 +9,10 @@ namespace Business.Application
 {
     public interface IBlogApplicationService
     {
-        List<BlogSpace> GetAllBlogs();
-        void ModifyBlogSpace(BlogSpace blogSpace);
-        List<BlogSpace> GetAllBlogsByMemberUsername(string username);
-        void DeleteAllBlogSpacesByMemberUsername(string username);
-        void DeleteBlogSpaceByBlogId(int blogId);
+        void CreateBlogSpace(string username, BlogSpace blogSpace);
+        void ModifyBlogSpace(string username, BlogSpace blogSpace);
+        List<BlogSpace> GetAllBlogSpaces(string username);
+        void DeleteBlogSpace(string username, int blogId);
+        void DeleteAllBlogSpaces(string username);
     }
 }

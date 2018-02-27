@@ -3,35 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Domain;
 using Business.Entity;
 
 namespace Business.Application
 {
-    class BlogApplicationService : IBlogApplicationService
+    public class BlogApplicationService : IBlogApplicationService
     {
-        public void DeleteAllBlogSpacesByMemberUsername(string username)
+        private readonly IBlogSpaceDomainService _blogDomain;
+        public BlogApplicationService(IBlogSpaceDomainService blogSpaceDomainService)
         {
-            
+            _blogDomain = blogSpaceDomainService;
         }
 
-        public void DeleteBlogSpaceByBlogId(int blogId)
+        public void CreateBlogSpace(string username, BlogSpace blogSpace)
         {
-            throw new NotImplementedException();
+            _blogDomain.CreateBlogSpace(username, blogSpace);
         }
 
-        public List<BlogSpace> GetAllBlogs()
+        public void DeleteAllBlogSpaces(string username)
         {
-            throw new NotImplementedException();
+            _blogDomain.DeleteAllBlogSpaces(username);
         }
 
-        public List<BlogSpace> GetAllBlogsByMemberUsername(string username)
+        public void DeleteBlogSpace(string username, int blogId)
         {
-            throw new NotImplementedException();
+            _blogDomain.DelteBlogSpace(username, blogId);
         }
 
-        public void ModifyBlogSpace(BlogSpace blogSpace)
+        public List<BlogSpace> GetAllBlogSpaces(string username)
         {
-            throw new NotImplementedException();
+            return _blogDomain.GetAllBlogSpaces(username);
+        }
+
+        public void ModifyBlogSpace(string username, BlogSpace blogSpace)
+        {
+            _blogDomain.ModifyBlogSpace(username, blogSpace);
         }
     }
 }

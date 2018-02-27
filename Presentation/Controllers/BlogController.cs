@@ -17,39 +17,32 @@ namespace Presentation.Controllers
             _blogApplicationService = blogApplicationService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("")]
-        public IEnumerable<BlogSpace> GetAllBlogs()
+        public void CreateBlog(String username ,[FromBody] BlogSpace blogSpace)
         {
-            return _blogApplicationService.GetAllBlogs();
+            _blogApplicationService.CreateBlogSpace(username ,blogSpace);
         }
 
         [HttpPut]
         [Route("")]
-        public void ModifyBlogSpace([FromBody] BlogSpace blogSpace)
+        public void ModifyBlogSpace(String username ,[FromBody] BlogSpace blogSpace)
         {
-            _blogApplicationService.ModifyBlogSpace(blogSpace);
+            _blogApplicationService.ModifyBlogSpace(username, blogSpace);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<BlogSpace> GetAllBlogsByMemberUsername(String username)
+        public List<BlogSpace> GetAllBlogsByMemberUsername(String username)
         {
-            return _blogApplicationService.GetAllBlogsByMemberUsername(username);
-        }
-
-        [HttpPut]
-        [Route("")]
-        public void DeleteAllBlogSpacesByMemberUsername(String username)
-        {
-            _blogApplicationService.DeleteAllBlogSpacesByMemberUsername(username);
+            return _blogApplicationService.GetAllBlogSpaces(username);
         }
 
         [HttpDelete]
         [Route("{blogId}")]
-        public void DeleteBlogSpaceByBlogId(int blogId)
+        public void DeleteBlogSpaceByBlogId(String username, int blogId)
         {
-            _blogApplicationService.DeleteBlogSpaceByBlogId(blogId);
+            _blogApplicationService.DeleteBlogSpace(username, blogId);
         }
     }
 }

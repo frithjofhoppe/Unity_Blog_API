@@ -17,20 +17,28 @@ namespace Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public void ChangeEntityState(object entity, EntityState state)
+        {
+            _context.Entry(entity).State = state;
+        }
+
         public void CreateBlogSpace(BlogSpace blog)
         {
             _context.BlogSpaces.Add(blog);
             _context.SaveChanges();
         }
 
-        public void DeleteBlogSpaceById(int id)
+        public void DeleteBlogSpace(BlogSpace blog)
         {
-            BlogSpace exisiting = _context.BlogSpaces.FirstOrDefault(item => item.BlogSpaceId == id);
-            if(exisiting != null)
-            {
-                _context.BlogSpaces.Remove(exisiting);
-                _context.SaveChanges();
-            }
+            _context.BlogSpaces.Remove(blog);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMultipleBlogSpaces(List<BlogSpace> blogs)
+        {
+            blogs.ForEach(item => _context.BlogSpaces.Remove(item));
+            _context.SaveChanges();
         }
 
         public IQueryable<BlogSpace> GetAllBlogSpaces()
@@ -46,16 +54,9 @@ namespace Infrastructure.Repositories
                 .FirstOrDefault(item => item.BlogSpaceId == id);
         }
 
-        public void ModifyBlog(BlogSpace blogSpace)
+        public void ModifyBlog()
         {
-            BlogSpace exisiting = _context.BlogSpaces
-                .FirstOrDefault(item => item.BlogSpaceId == blogSpace.BlogSpaceId);
-            if (exisiting != null)
-            {
-                exisiting.BlogSpaceIsPublic = blogSpace.BlogSpaceIsPublic;
-                exisiting.BlogSpaceTitle = blogSpace.BlogSpaceTitle;
-                _context.SaveChanges();
-            }
+            _context.SaveChanges();
         }
     }
 }
